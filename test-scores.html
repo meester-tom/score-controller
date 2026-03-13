@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Score Submit Test</title>
+  </head>
+  <body>
+    <h1>Score Submit Test</h1>
+    <p>Deze pagina stuurt 5 scores naar het endpoint, elke seconde één.</p>
+
+    <pre id="log"></pre>
+
+    <script>
+      const ENDPOINT = "https://jouwdomein.vercel.app/api/submit-score";
+
+      let counter = 1;
+      const max = 5;
+
+      function log(msg) {
+        document.getElementById("log").textContent += msg + "\n";
+      }
+
+      function sendScore() {
+        const name = "TestUser" + counter;
+        const score = Math.random().toFixed(3); // random score
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, score: Number(score) })
+        })
+          .then((res) => res.json())
+          .then((data) => log("Verstuurd: " + JSON.stringify(data)))
+          .catch((err) => log("Fout: " + err));
+
+        counter++;
+        if (counter > max) {
+          clearInterval(interval);
+          log("Klaar! Alle scores verstuurd.");
+        }
+      }
+
+      const interval = setInterval(sendScore, 1000);
+    </script>
+  </body>
+</html>
