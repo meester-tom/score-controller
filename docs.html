@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Score Submit API Documentatie</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+    code, pre {
+      background: #f4f4f4;
+      padding: 8px;
+      border-radius: 6px;
+      display: block;
+      white-space: pre-wrap;
+    }
+    h1, h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 Score Submit API — Documentatie</h1>
+
+  <p>Deze API laat je een score insturen vanuit je app. Je stuurt een naam en een reactietijd, en de server slaat dit op.</p>
+
+  <h2>📍 Endpoint</h2>
+  <code>POST https://score-controller.vercel.app/api/submit-score</code>
+
+  <h2>📦 Request body (JSON)</h2>
+  <pre>{
+  "name": "string",
+  "score": 0.123
+}</pre>
+
+  <p><strong>name</strong> — de naam van de speler<br>
+     <strong>score</strong> — de reactietijd in seconden (nummer)</p>
+
+  <h2>🧪 Voorbeeld request</h2>
+  <pre>fetch("https://score-controller.vercel.app/api/submit-score", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Sanne",
+    score: 0.241
+  })
+});</pre>
+
+  <h2>📥 Response bij succes</h2>
+  <pre>{
+  "success": true,
+  "entry": {
+    "name": "Sanne",
+    "score": 0.241,
+    "timestamp": 1736862342342
+  }
+}</pre>
+
+  <h2>⚠️ Response bij fout</h2>
+  <pre>{ "error": "Invalid payload" }</pre>
+
+  <h2>📌 Regels</h2>
+  <ul>
+    <li>Gebruik altijd <strong>POST</strong></li>
+    <li>Stuur JSON met <code>name</code> en <code>score</code></li>
+    <li>Score moet een nummer zijn</li>
+  </ul>
+
+  <p>Deze documentatie is geschikt voor gebruik met vibe coding en Claude.ai.</p>
+
+</body>
+</html>
