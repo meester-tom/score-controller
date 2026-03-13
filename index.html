@@ -3,15 +3,99 @@
   <head>
     <title>Scores</title>
     <style>
-      body { font-family: sans-serif; padding: 20px; }
-      .score { margin-bottom: 8px; }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: system-ui, sans-serif;
+        background: #0f1117;
+        color: #e2e8f0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48px 16px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 4px;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 36px;
+      }
+
+      #scores {
+        width: 100%;
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .score {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #1e2130;
+        border: 1px solid #2d3148;
+        border-radius: 10px;
+        padding: 14px 18px;
+        transition: background 0.15s;
+      }
+
+      .score:hover { background: #252840; }
+
+      .rank {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #64748b;
+        width: 24px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .score:nth-child(1) .rank { color: #fbbf24; font-size: 1.1rem; }
+      .score:nth-child(2) .rank { color: #94a3b8; font-size: 1.05rem; }
+      .score:nth-child(3) .rank { color: #cd7c2f; font-size: 1rem; }
+
+      .name {
+        flex: 1;
+        font-weight: 500;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .time {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #38bdf8;
+        flex-shrink: 0;
+      }
+
+      .empty {
+        text-align: center;
+        color: #475569;
+        font-size: 0.9rem;
+        padding: 32px 0;
+      }
     </style>
   </head>
   <body>
     <h1>Live Scores</h1>
+    <p class="subtitle">Refreshes every second &mdash; lowest time wins</p>
     <div id="scores"></div>
 
     <script>
+      const MEDALS = ["🥇", "🥈", "🥉"];
+
       async function loadScores() {
         const res = await fetch("/api/submit-score");
         const data = await res.json();
@@ -19,12 +103,33 @@
         const container = document.getElementById("scores");
         container.innerHTML = "";
 
+        if (!data.length) {
+          const empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "No scores yet.";
+          container.appendChild(empty);
+          return;
+        }
+
         data
           .sort((a, b) => a.score - b.score)
-          .forEach(s => {
+          .forEach((s, i) => {
             const div = document.createElement("div");
             div.className = "score";
-            div.textContent = `${s.name}: ${s.score}s`;
+
+            const rank = document.createElement("span");
+            rank.className = "rank";
+            rank.textContent = MEDALS[i] ?? `#${i + 1}`;
+
+            const name = document.createElement("span");
+            name.className = "name";
+            name.textContent = s.name;
+
+            const time = document.createElement("span");
+            time.className = "time";
+            time.textContent = `${s.score}s`;
+
+            div.append(rank, name, time);
             container.appendChild(div);
           });
       }
