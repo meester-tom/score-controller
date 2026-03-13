@@ -86,12 +86,30 @@
         font-size: 0.9rem;
         padding: 32px 0;
       }
+
+      #reset-btn {
+        position: fixed;
+        bottom: 28px;
+        left: 28px;
+        background: #1e2130;
+        color: #f87171;
+        border: 1px solid #3d2020;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+      }
+
+      #reset-btn:hover { background: #2d1f1f; border-color: #f87171; }
     </style>
   </head>
   <body>
     <h1>Live Scores</h1>
     <p class="subtitle">Refreshes every second &mdash; lowest time wins</p>
     <div id="scores"></div>
+    <button id="reset-btn" onclick="resetScores()">Reset scores</button>
 
     <script>
       const MEDALS = ["🥇", "🥈", "🥉"];
@@ -132,6 +150,12 @@
             div.append(rank, name, time);
             container.appendChild(div);
           });
+      }
+
+      async function resetScores() {
+        if (!confirm("Reset all scores?")) return;
+        await fetch("/api/submit-score", { method: "DELETE" });
+        loadScores();
       }
 
       setInterval(loadScores, 1000);
