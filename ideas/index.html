@@ -5,156 +5,271 @@
   <title>20 Vibe‑Coding Game Ideeën</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #fafafa;
-      line-height: 1.6;
-    }
-    h1, h2 {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 900px;
+      background: #f2f2f7;
       color: #333;
+      line-height: 1.7;
     }
+
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #444;
+      margin-top: 40px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .intro {
+      font-size: 1.15rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
     .game {
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 20px 24px;
+      border-radius: 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
     }
+
+    .game:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
     .nr {
       font-weight: bold;
-      color: #555;
+      font-size: 1.2rem;
+      color: #222;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
     }
   </style>
 </head>
 <body>
 
 <h1>20 Vibe‑Coding Game Ideeën</h1>
-<p>Deze games zijn bedoeld om binnen één lesuur te maken met behulp van AI (bijv. Claude of Copilot). Alle ideeën hebben lichte logica, weinig assets en een duidelijke scope.</p>
 
-<hr />
+<pre><code>- De score van het spel kan gesubmit worden naar een API.
+- De documentatie van de API staat op:
+  https://score-controller.vercel.app/docs.html
+</code></pre>
+
+<p class="intro">
+  Deze games kun je binnen één lesuur bouwen met hulp van een AI‑tool zoals Claude of Copilot.  
+  Ze zijn klein, duidelijk en ideaal om programmeerlogica en prototyping te oefenen.
+</p>
 
 <h2>Game‑ideeën</h2>
 
-<!-- 1 -->
+<!-- --- GAME CARDS --- -->
+
 <div class="game">
   <span class="nr">1. Number Guessing Game</span>
-  <p>De speler moet een geheim nummer raden. Variaties: hogere/lager hints, beperkt aantal pogingen, multiplayer of hints zoals “deelbaar door 3”.</p>
+  <ul>
+    <li>Speler raadt een geheim nummer.</li>
+    <li>Opties: hoger/lager hints, beperkt aantal pogingen.</li>
+    <li>Multiplayer-variant mogelijk.</li>
+  </ul>
 </div>
 
-<!-- 2 -->
 <div class="game">
-  <span class="nr">2. Simon Says (kleurvolgorde)</span>
-  <p>Elke ronde wordt de kleurreeks langer. De speler moet de volledige sequence klikken. Goed voor DOM‑interactie.</p>
+  <span class="nr">2. Simon Says</span>
+  <ul>
+    <li>Kleurvolgorde onthouden en reproduceren.</li>
+    <li>Elke ronde komt er een kleur bij.</li>
+    <li>Perfect voor DOM‑interactie.</li>
+  </ul>
 </div>
 
-<!-- 3 -->
 <div class="game">
   <span class="nr">3. Endless Dodger</span>
-  <p>Objecten vallen van boven; speler beweegt links/rechts om te ontwijken. Score stijgt naarmate je langer overleeft.</p>
+  <ul>
+    <li>Vallende objecten ontwijken.</li>
+    <li>Score stijgt naarmate je langer overleeft.</li>
+    <li>Makkelijk met basis-animaties.</li>
+  </ul>
 </div>
 
-<!-- 4 -->
 <div class="game">
   <span class="nr">4. Reflex Math / Typing Trainer</span>
-  <p>Tijdsdruk: speler moet binnen X seconden een antwoord typen (rekensom, woord, emoji‑code). Leuke highscore-mogelijkheden.</p>
+  <ul>
+    <li>Som of woord tonen, speler moet snel reageren.</li>
+    <li>Tijdslimiet maakt het spannend.</li>
+    <li>Highscore‑mechaniek mogelijk.</li>
+  </ul>
 </div>
 
-<!-- 5 -->
 <div class="game">
   <span class="nr">5. Dobbelsteen-Battle</span>
-  <p>Speler vs computer, beide rollen een dobbelsteen. Uitbreidingen: verschillende dobbelstenen, power‑ups, best‑of‑5.</p>
+  <ul>
+    <li>Speler vs computer: wie rolt het hoogst?</li>
+    <li>Opties: verschillende soorten dobbelstenen.</li>
+    <li>Animaties voor extra flair.</li>
+  </ul>
 </div>
 
-<!-- 6 -->
 <div class="game">
-  <span class="nr">6. Mini Memory Game</span>
-  <p>Eenvoudig memory met 6–10 kaarten. Gebruik emoji’s of kleine afbeeldingen. Perfect voor beginners.</p>
+  <span class="nr">6. Memory Game</span>
+  <ul>
+    <li>Memory met emoji's of plaatjes.</li>
+    <li>6–10 kaarten voor snelle gameplay.</li>
+    <li>Match = kaart blijft open.</li>
+  </ul>
 </div>
 
-<!-- 7 -->
 <div class="game">
   <span class="nr">7. Quick Draw Duel</span>
-  <p>Twee spelers wachten tot er een signaal komt: wie het snelst klikt, wint. Uitbreidingen: random delays, penalty’s.</p>
+  <ul>
+    <li>Wacht op signaal → klik zo snel mogelijk.</li>
+    <li>1 of 2 spelers.</li>
+    <li>Random delays voegen spanning toe.</li>
+  </ul>
 </div>
 
-<!-- 8 -->
 <div class="game">
   <span class="nr">8. Tamagotchi-Lite</span>
-  <p>Eenvoudige statusbalken (honger, energie). Waarden dalen automatisch. Speler moet knoppen gebruiken om bij te sturen.</p>
+  <ul>
+    <li>Eenvoudige statusbalken zoals honger/energie.</li>
+    <li>Waarden dalen automatisch.</li>
+    <li>Speler moet knoppen gebruiken om het karakter te houden leven.</li>
+  </ul>
 </div>
 
-<!-- 9 -->
 <div class="game">
   <span class="nr">9. Target Clicker Game</span>
-  <p>Targets verschijnen willekeurig. De speler moet binnen 0.5 seconden klikken. Mis = game over.</p>
+  <ul>
+    <li>Doelen verschijnen willekeurig.</li>
+    <li>Speler moet razendsnel klikken.</li>
+    <li>Mis = einde spel.</li>
+  </ul>
 </div>
 
-<!-- 10 -->
 <div class="game">
   <span class="nr">10. Mini Music Sequencer</span>
-  <p>Klein grid waarin spelers beats kunnen activeren. De loop herhaalt automatisch. Leuke kennismaking met audio API’s.</p>
+  <ul>
+    <li>Grid waar je geluidjes kunt activeren.</li>
+    <li>Loop speelt automatisch af.</li>
+    <li>Intro tot simpele audio‑API’s.</li>
+  </ul>
 </div>
 
-<!-- NEW IDEAS BELOW -->
-
-<!-- 11 -->
 <div class="game">
   <span class="nr">11. Reaction Maze</span>
-  <p>Een klein karakter moet binnen X seconden het doel bereiken op een grid. Obstakels zijn willekeurig gegenereerd.</p>
+  <ul>
+    <li>Doolhof met obstacles.</li>
+    <li>Je moet het doel binnen X seconden bereiken.</li>
+    <li>Random gegenereerde layouts.</li>
+  </ul>
 </div>
 
-<!-- 12 -->
 <div class="game">
   <span class="nr">12. Emoji Slot Machine</span>
-  <p>Drie draaiende emoji‑rollen. Speler drukt op “Spin”. Matching combinaties leveren punten op.</p>
+  <ul>
+    <li>Drie draaiende emoji‑rollen.</li>
+    <li>Matching combinaties geven punten.</li>
+    <li>Zeer visueel en simpel.</li>
+  </ul>
 </div>
 
-<!-- 13 -->
 <div class="game">
   <span class="nr">13. Flappy‑Bird‑Lite</span>
-  <p>Minimalistische variant: één knop om te “springen”. Obstakels bewegen naar links. Makkelijk te implementeren met canvas of zelfs DOM.</p>
+  <ul>
+    <li>Druk op één knop om te vliegen.</li>
+    <li>Obstakels bewegen richting speler.</li>
+    <li>Supergoed te bouwen in canvas.</li>
+  </ul>
 </div>
 
-<!-- 14 -->
 <div class="game">
   <span class="nr">14. Battle Quiz Game</span>
-  <p>Bij elke goed antwoord “valt” de tegenstander 10 HP. Fout antwoord: jij verliest HP. Makkelijk scriptbaar.</p>
+  <ul>
+    <li>Goed antwoord: tegenstander verliest HP.</li>
+    <li>Fout antwoord: jij verliest HP.</li>
+    <li>Lichte RPG‑mechanieken.</li>
+  </ul>
 </div>
 
-<!-- 15 -->
 <div class="game">
   <span class="nr">15. Rock–Paper–Scissors Deluxe</span>
-  <p>Basis RPS, maar voeg extra elementen toe: “Lizard” en “Spock”, aanval‑animaties of een combo‑meter.</p>
+  <ul>
+    <li>Uitgebreide versie met extra opties.</li>
+    <li>Lizard & Spock toevoegen mogelijk.</li>
+    <li>Leuk voor animaties.</li>
+  </ul>
 </div>
 
-<!-- 16 -->
 <div class="game">
   <span class="nr">16. Platform Jump Game</span>
-  <p>Eenvoudige verticale jumper (zoals Doodle Jump). Platforms spawnen willekeurig; speler stijgt steeds hoger.</p>
+  <ul>
+    <li>Spring zo hoog mogelijk via platforms.</li>
+    <li>Platforms spawnen random.</li>
+    <li>Score = hoogte.</li>
+  </ul>
 </div>
 
-<!-- 17 -->
 <div class="game">
-  <span class="nr">17. Escape Room Mini</span>
-  <p>Een klein scherm met 4–5 puzzels: codekraker, schuifpuzzel, verborgen knop. Alles in één HTML‑pagina.</p>
+  <span class="nr">17. Mini Escape Room</span>
+  <ul>
+    <li>4–5 mini‑puzzels op één pagina.</li>
+    <li>Codes, sliders, verborgen knoppen.</li>
+    <li>Toegankelijk en creatief.</li>
+  </ul>
 </div>
 
-<!-- 18 -->
 <div class="game">
   <span class="nr">18. Traffic Light Challenge</span>
-  <p>Speler moet reageren op verkeerslichten. Groen = klik. Rood = niet klikken. Onderdeel: vals‑positieve signalen.</p>
+  <ul>
+    <li>Groen = klik, rood = niet klikken.</li>
+    <li>Vals signaal maakt het pittiger.</li>
+    <li>Perfect voor reaction‑training.</li>
+  </ul>
 </div>
 
-<!-- 19 -->
 <div class="game">
   <span class="nr">19. Word Builder Game</span>
-  <p>Speler krijgt willekeurige letters en moet in 30 seconden zoveel mogelijk woorden maken. Controle via dictionary API of simpele lijst.</p>
+  <ul>
+    <li>Random letters → maak zoveel mogelijk woorden.</li>
+    <li>30‑secondentimer.</li>
+    <li>Gebruik kleine lijst voor woordcontrole.</li>
+  </ul>
 </div>
 
-<!-- 20 -->
 <div class="game">
   <span class="nr">20. Collect the Coins</span>
-  <p>Speler bestuurt een karakter en probeert binnen 20 seconden zoveel mogelijk munten te verzamelen. Makkelijk met DOM-positionering.</p>
+  <ul>
+    <li>Beweeg door een speelveld en verzamel munten.</li>
+    <li>Tijdslimiet maakt het spannend.</li>
+    <li>Heel simpel via DOM‑positie.</li>
+  </ul>
 </div>
 
 </body>
