@@ -47,7 +47,7 @@
 }</pre>
 
   <p><strong>name</strong> — de naam van de speler<br>
-     <strong>score</strong> — aantal punten (nummer)</p>
+      <strong>score</strong> — aantal punten (nummer, maximaal 10000)</p>
 
   <h2>🧪 Voorbeeld POST request</h2>
   <pre>fetch("https://score-controller.vercel.app/api/submit-score", {
@@ -84,7 +84,9 @@
 
   <h2>⚠️ Responses bij fouten</h2>
   <ul>
-    <li><code>{ "error": "Invalid payload" }</code> (400)</li>
+    <li><code>{ "error": "Invalid payload: 'name' is required and must be a non-empty string" }</code> (400)</li>
+    <li><code>{ "error": "Invalid payload: 'score' must be a finite number" }</code> (400)</li>
+    <li><code>{ "error": "Invalid payload: 'score' cannot exceed 10000. Received 12000" }</code> (400)</li>
     <li><code>{ "error": "Origin not allowed" }</code> (403)</li>
     <li><code>{ "error": "Method not allowed" }</code> (405)</li>
     <li><code>{ "error": "Server error" }</code> (500)</li>
@@ -103,7 +105,8 @@
   <h2>📌 Regels</h2>
   <ul>
     <li>Stuur bij <strong>POST</strong> JSON met <code>name</code> en <code>score</code></li>
-    <li>Score moet een nummer zijn</li>
+    <li>Score moet een eindig nummer zijn</li>
+    <li>Maximale score is <strong>10000</strong></li>
     <li>Data staat in-memory en kan resetten als de serverless functie opnieuw opstart</li>
   </ul>
 

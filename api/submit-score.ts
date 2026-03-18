@@ -21,6 +21,7 @@ type ScoreEntry = SubmitScoreBody & {
 };
 
 let scores: ScoreEntry[] = [];
+const MAX_SCORE = 10000;
 
 const VERCEL_SUBDOMAIN_ORIGIN = /^https:\/\/([a-z0-9-]+\.)*vercel\.app$/i;
 const LOCALHOST_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i;
@@ -80,10 +81,24 @@ export default async function handler(
 
   if (req.method === "POST") {
     try {
-      const { name, score } = req.body;
+      const { name, score } = req.body ?? {};
 
-      if (!name || typeof score !== "number") {
-        return res.status(400).json({ error: "Invalid payload" });
+      if (typeof name !== "string" || !name.trim()) {
+        return res.status(400).json({
+          error: "Invalid payload: 'name' is required and must be a non-empty string"
+        });
+      }
+
+      if (typeof score !== "number" || !Number.isFinite(score)) {
+        return res.status(400).json({
+          error: "Invalid payload: 'score' must be a finite number"
+        });
+      }
+
+      if (score > MAX_SCORE) {
+        return res.status(400).json({
+          error: `Invalid payload: 'score' cannot exceed ${MAX_SCORE}. Received ${score}`
+        });
       }
 
       const entry: ScoreEntry = {
