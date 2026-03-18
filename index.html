@@ -107,7 +107,7 @@
   </head>
   <body>
     <h1>Live Scores</h1>
-    <p class="subtitle">Refreshes every second &mdash; lowest time wins</p>
+    <p class="subtitle">Refreshes every second &mdash; highest score wins</p>
     <div id="scores"></div>
     <button id="reset-btn" onclick="resetScores()">Reset scores</button>
 
@@ -130,7 +130,7 @@
         }
 
         data
-          .sort((a, b) => a.score - b.score)
+          .sort((a, b) => b.score - a.score)
           .forEach((s, i) => {
             const div = document.createElement("div");
             div.className = "score";
@@ -145,7 +145,7 @@
 
             const time = document.createElement("span");
             time.className = "time";
-            time.textContent = `${s.score}s`;
+            time.textContent = `${s.score}`;
 
             div.append(rank, name, time);
             container.appendChild(div);
