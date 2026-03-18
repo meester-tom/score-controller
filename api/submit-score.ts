@@ -23,6 +23,21 @@ type ScoreEntry = SubmitScoreBody & {
 let scores: ScoreEntry[] = [];
 
 const VERCEL_SUBDOMAIN_ORIGIN = /^https:\/\/([a-z0-9-]+\.)*vercel\.app$/i;
+const LOCALHOST_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i;
+const FILE_ORIGIN = "null";
+
+function isAllowedOrigin(origin: string | undefined): boolean {
+  if (!origin) {
+    // Allow non-browser/server-to-server calls that do not send an Origin header.
+    return true;
+  }
+
+  return (
+    origin === FILE_ORIGIN ||
+    VERCEL_SUBDOMAIN_ORIGIN.test(origin) ||
+    LOCALHOST_ORIGIN.test(origin)
+  );
+}
 
 function getOrigin(req: VercelRequest): string | undefined {
   const originHeader = req.headers?.origin;
@@ -37,7 +52,7 @@ function getOrigin(req: VercelRequest): string | undefined {
 function setCorsHeaders(req: VercelRequest, res: VercelResponse) {
   const origin = getOrigin(req);
 
-  if (origin && VERCEL_SUBDOMAIN_ORIGIN.test(origin)) {
+  if (origin && isAllowedOrigin(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
 
@@ -55,7 +70,7 @@ export default async function handler(
 
   const origin = getOrigin(req);
 
-  if (origin && !VERCEL_SUBDOMAIN_ORIGIN.test(origin)) {
+  if (!isAllowedOrigin(origin)) {
     return res.status(403).json({ error: "Origin not allowed" });
   }
 

@@ -27,48 +27,84 @@
 
   <h1>📘 Score Submit API — Documentatie</h1>
 
-  <p>Deze API laat je een score insturen vanuit je app. Je stuurt een naam en een reactietijd, en de server slaat dit op.</p>
+  <p>Deze API laat je scores (punten) opslaan en uitlezen. Je stuurt een naam en score, en de server bewaart dit tijdelijk in-memory.</p>
 
   <h2>📍 Endpoint</h2>
-  <code>POST https://score-controller.vercel.app/api/submit-score</code>
+  <code>https://score-controller.vercel.app/api/submit-score</code>
 
-  <h2>📦 Request body (JSON)</h2>
+  <h2>🧭 Ondersteunde methods</h2>
+  <ul>
+    <li><strong>POST</strong> — voeg een score toe</li>
+    <li><strong>GET</strong> — haal alle scores op</li>
+    <li><strong>DELETE</strong> — verwijder alle scores</li>
+    <li><strong>OPTIONS</strong> — CORS preflight</li>
+  </ul>
+
+  <h2>📦 POST request body (JSON)</h2>
   <pre>{
   "name": "string",
-  "score": 0.123
+  "score": 123
 }</pre>
 
   <p><strong>name</strong> — de naam van de speler<br>
-     <strong>score</strong> — de reactietijd in seconden (nummer)</p>
+     <strong>score</strong> — aantal punten (nummer)</p>
 
-  <h2>🧪 Voorbeeld request</h2>
+  <h2>🧪 Voorbeeld POST request</h2>
   <pre>fetch("https://score-controller.vercel.app/api/submit-score", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     name: "Sanne",
-    score: 0.241
+    score: 241
   })
 });</pre>
 
-  <h2>📥 Response bij succes</h2>
+  <h2>📥 Responses bij succes</h2>
+  <p><strong>POST</strong></p>
   <pre>{
   "success": true,
   "entry": {
     "name": "Sanne",
-    "score": 0.241,
+    "score": 241,
     "timestamp": 1736862342342
   }
 }</pre>
 
-  <h2>⚠️ Response bij fout</h2>
-  <pre>{ "error": "Invalid payload" }</pre>
+  <p><strong>GET</strong></p>
+  <pre>[
+  {
+    "name": "Sanne",
+    "score": 241,
+    "timestamp": 1736862342342
+  }
+]</pre>
+
+  <p><strong>DELETE</strong> en <strong>OPTIONS</strong></p>
+  <pre>{ "success": true }</pre>
+
+  <h2>⚠️ Responses bij fouten</h2>
+  <ul>
+    <li><code>{ "error": "Invalid payload" }</code> (400)</li>
+    <li><code>{ "error": "Origin not allowed" }</code> (403)</li>
+    <li><code>{ "error": "Method not allowed" }</code> (405)</li>
+    <li><code>{ "error": "Server error" }</code> (500)</li>
+  </ul>
+
+  <h2>🌐 CORS</h2>
+  <p>Cross-origin requests zijn toegestaan voor:</p>
+  <ul>
+    <li><strong>https://*.vercel.app</strong></li>
+    <li><strong>http://localhost:*</strong> en <strong>https://localhost:*</strong></li>
+    <li><strong>http://127.0.0.1:*</strong> en <strong>https://127.0.0.1:*</strong></li>
+    <li>Losse browserbestanden zonder server (Origin: <strong>null</strong>, bijvoorbeeld <strong>file://</strong>)</li>
+  </ul>
+  <p>Andere origins krijgen een 403 response.</p>
 
   <h2>📌 Regels</h2>
   <ul>
-    <li>Gebruik altijd <strong>POST</strong></li>
-    <li>Stuur JSON met <code>name</code> en <code>score</code></li>
+    <li>Stuur bij <strong>POST</strong> JSON met <code>name</code> en <code>score</code></li>
     <li>Score moet een nummer zijn</li>
+    <li>Data staat in-memory en kan resetten als de serverless functie opnieuw opstart</li>
   </ul>
 
   <p>Deze documentatie is geschikt voor gebruik met vibe coding en Claude.ai.</p>
